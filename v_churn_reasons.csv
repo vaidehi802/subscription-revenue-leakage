@@ -1,0 +1,9 @@
+cancel_reason,churned_customers,mrr_lost,arr_lost,pct_of_churn
+Payment Failure,237,15975,191700,20.63
+Too Expensive,192,10802,129624,16.71
+Missing Features,155,8899,106788,13.49
+Switched Competitor,150,9599,115188,13.05
+No Longer Needed,148,8700,104400,12.88
+Poor Support,107,6996,83952,9.31
+Technical Issues,89,4983,59796,7.75
+Budget Cuts,71,3258,39096,6.18

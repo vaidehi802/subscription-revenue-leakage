@@ -1,0 +1,9 @@
+plan_name,billing_cycle,failed_count,failed_revenue,unrecovered_revenue
+Enterprise,Annual,18,42556.8,33696.0
+Enterprise,Monthly,154,36266.85,20729.25
+Business,Annual,34,31734.0,19286.4
+Pro,Annual,64,30282.6,15793.2
+Business,Monthly,309,29150.55,16206.3
+Pro,Monthly,583,26981.85,14415.8
+Basic,Monthly,828,14924.5,8476.85
+Basic,Annual,57,10387.2,6441.6

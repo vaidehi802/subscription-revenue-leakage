@@ -1,0 +1,9 @@
+plan_id,plan_name,billing_cycle,monthly_price,tier_rank
+P_BASIC_M,Basic,Monthly,19,1
+P_PRO_M,Pro,Monthly,49,2
+P_BUS_M,Business,Monthly,99,3
+P_ENT_M,Enterprise,Monthly,249,4
+P_BASIC_A,Basic,Annual,16,1
+P_PRO_A,Pro,Annual,41,2
+P_BUS_A,Business,Annual,82,3
+P_ENT_A,Enterprise,Annual,208,4

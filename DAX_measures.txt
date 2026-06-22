@@ -1,0 +1,132 @@
+/* ============================================================================
+   POWER BI — DAX MEASURES REFERENCE
+   Subscription Revenue Leakage Dashboard
+   ----------------------------------------------------------------------------
+   Create a measures table in Power BI and paste these. They assume the fact/dim
+   tables (fact_subscriptions, fact_payments, fact_downgrades, fact_renewals,
+   dim_customers, dim_plans) were imported from the Excel workbook / CSVs.
+   ============================================================================ */
+
+/* ---------- 1. REVENUE OVERVIEW ---------- */
+
+Total Revenue =
+CALCULATE ( SUM ( fact_payments[net_amount] ), fact_payments[status] = "Success" )
+
+MRR =
+CALCULATE ( SUM ( fact_subscriptions[mrr] ), fact_subscriptions[status] = "Active" )
+
+ARR = [MRR] * 12
+
+Active Subscribers =
+CALCULATE ( DISTINCTCOUNT ( fact_subscriptions[subscription_id] ),
+            fact_subscriptions[status] = "Active" )
+
+Total Discounts Given =
+CALCULATE ( SUM ( fact_payments[discount_amount] ), fact_payments[status] = "Success" )
+
+
+/* ---------- 2. FAILED PAYMENT ANALYSIS ---------- */
+
+Failed Payments =
+CALCULATE ( COUNTROWS ( fact_payments ), fact_payments[status] = "Failed" )
+
+Payment Failure Rate % =
+DIVIDE ( [Failed Payments], COUNTROWS ( fact_payments ) )
+
+Failed Revenue =
+CALCULATE ( SUM ( fact_payments[net_amount] ), fact_payments[status] = "Failed" )
+
+Recovered Revenue =
+CALCULATE ( SUM ( fact_payments[net_amount] ),
+            fact_payments[status] = "Failed", fact_payments[recovered] = 1 )
+
+Unrecovered (Recoverable) Revenue =
+CALCULATE ( SUM ( fact_payments[net_amount] ),
+            fact_payments[status] = "Failed", fact_payments[recovered] = 0 )
+
+Recovery Rate % =
+DIVIDE ( [Recovered Revenue], [Failed Revenue] )
+
+
+/* ---------- 3. CHURN ANALYSIS ---------- */
+
+Churned Subscribers =
+CALCULATE ( COUNTROWS ( fact_subscriptions ), fact_subscriptions[status] = "Churned" )
+
+Churned MRR Lost =
+CALCULATE ( SUM ( fact_subscriptions[mrr] ), fact_subscriptions[status] = "Churned" )
+
+Churn Rate % =
+DIVIDE (
+    CALCULATE ( COUNTROWS ( fact_subscriptions ),
+                fact_subscriptions[status] IN { "Churned", "Expired" } ),
+    COUNTROWS ( fact_subscriptions )
+)
+
+
+/* ---------- 4. EXPIRED SUBSCRIPTIONS ---------- */
+
+Expired Subscriptions =
+CALCULATE ( COUNTROWS ( fact_subscriptions ), fact_subscriptions[status] = "Expired" )
+
+Missed Renewal MRR =
+CALCULATE ( SUM ( fact_subscriptions[mrr] ), fact_subscriptions[status] = "Expired" )
+
+Missed Renewal ARR = [Missed Renewal MRR] * 12
+
+
+/* ---------- 5. DOWNGRADE ANALYSIS ---------- */
+
+Downgrade Count = COUNTROWS ( fact_downgrades )
+
+Downgrade MRR Lost = SUM ( fact_downgrades[mrr_lost] )
+
+Downgrade Annual Loss = [Downgrade MRR Lost] * 12
+
+
+/* ---------- 6. DISCOUNT LEAKAGE ---------- */
+
+Gross Revenue =
+CALCULATE ( SUM ( fact_payments[gross_amount] ), fact_payments[status] = "Success" )
+
+Effective Discount % =
+DIVIDE ( [Total Discounts Given], [Gross Revenue] )
+
+
+/* ---------- 7. RETENTION ---------- */
+
+Retention Rate % =
+DIVIDE ( [Active Subscribers], DISTINCTCOUNT ( fact_subscriptions[subscription_id] ) )
+
+Renewal Rate % =
+DIVIDE (
+    CALCULATE ( COUNTROWS ( fact_renewals ), fact_renewals[renewed] = 1 ),
+    COUNTROWS ( fact_renewals )
+)
+
+ARPU =
+AVERAGEX ( FILTER ( fact_subscriptions, fact_subscriptions[status] = "Active" ),
+           fact_subscriptions[mrr] )
+
+Avg Lifetime Months =
+AVERAGEX ( fact_subscriptions,
+    DATEDIFF ( fact_subscriptions[start_date],
+               COALESCE ( fact_subscriptions[end_date], DATE(2024,12,31) ), MONTH ) )
+
+CLV = [ARPU] * 0.80 * [Avg Lifetime Months]   /* 80% gross-margin assumption */
+
+
+/* ---------- 8. REVENUE LEAKAGE ROOT CAUSE ---------- */
+
+Churn Loss = [Churned MRR Lost]
+Failed Payment Loss = [Unrecovered (Recoverable) Revenue]
+Expired Loss = [Missed Renewal MRR]
+Downgrade Loss = [Downgrade MRR Lost]
+Discount Loss = [Total Discounts Given]
+
+Total Revenue Leakage =
+[Churn Loss] + [Failed Payment Loss] + [Expired Loss]
+    + [Downgrade Loss] + [Discount Loss]
+
+Leakage % of Revenue =
+DIVIDE ( [Total Revenue Leakage], [Total Revenue] )

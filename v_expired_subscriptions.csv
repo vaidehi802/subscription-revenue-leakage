@@ -1,0 +1,21 @@
+segment,region,expired_subs,missed_mrr,missed_arr,avg_lifetime_days
+SMB,North America,106,6697,80364,248.0
+Mid-Market,North America,69,4406,52872,219.0
+SMB,Europe,57,3954,47448,275.0
+SMB,Asia Pacific,47,3044,36528,263.0
+Mid-Market,Europe,40,2950,35400,220.0
+Startup,North America,39,2496,29952,239.0
+Mid-Market,Asia Pacific,32,2223,26676,267.0
+SMB,Latin America,22,1692,20304,244.0
+Startup,Europe,25,1487,17844,232.0
+SMB,Middle East & Africa,18,1323,15876,221.0
+Enterprise,Asia Pacific,15,1013,12156,224.0
+Mid-Market,Latin America,20,1012,12144,170.0
+Enterprise,North America,21,964,11568,221.0
+Startup,Asia Pacific,15,751,9012,285.0
+Enterprise,Europe,9,678,8136,287.0
+Mid-Market,Middle East & Africa,8,574,6888,325.0
+Startup,Latin America,8,566,6792,235.0
+Enterprise,Latin America,5,429,5148,261.0
+Enterprise,Middle East & Africa,3,397,4764,130.0
+Startup,Middle East & Africa,5,257,3084,289.0

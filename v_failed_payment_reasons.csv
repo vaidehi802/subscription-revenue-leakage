@@ -1,0 +1,8 @@
+failure_reason,occurrences,revenue_at_risk,pct_of_failures
+Insufficient Funds,606,65313.25,29.6
+Card Expired,448,47505.15,21.89
+Card Declined,371,38007.35,18.12
+Processing Error,208,24171.25,10.16
+Invalid Card Details,162,14675.05,7.91
+Fraud Suspected,129,17934.85,6.3
+Bank Authentication Failed,123,14677.45,6.01

@@ -1,0 +1,7 @@
+from_plan,to_plan,downgrade_count,monthly_mrr_lost,annual_revenue_lost
+Pro,Basic,166,4520,54240
+Enterprise,Pro,18,3402,40824
+Business,Basic,46,3302,39624
+Enterprise,Basic,14,2992,35904
+Enterprise,Business,18,2508,30096
+Business,Pro,49,2288,27456
