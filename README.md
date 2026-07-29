@@ -4,7 +4,7 @@
 
 ![Dashboard](dashboard.png)
 
-[View the full dashboard (PDF)](dashboard.pdf)
+[View the full dashboard (PDF)](subscription revenue leakage.pdf)
 
 
 End-to-end project to identify, quantify, and reduce subscription revenue leakage.
