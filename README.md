@@ -1,7 +1,11 @@
 # Subscription Revenue Leakage — Analytics Dashboard
 ## Dashboard
 
+
+![Dashboard](dashboard.png)
+
 [View the full dashboard (PDF)](dashboard.pdf)
+
 
 End-to-end project to identify, quantify, and reduce subscription revenue leakage.
 **Pipeline: Python → SQL → Power BI.**
