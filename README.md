@@ -1,20 +1,7 @@
 # Subscription Revenue Leakage — Analytics Dashboard
 ## Dashboard
 
-### 1. Revenue Overview
-![Overview](dashboard.png)
-
-### 2. Failed Payment Analysis
-![Failed Payments](dashboard_2_failed_payments.png)
-
-### 3. Churn Analysis
-![Churn](dashboard_3_churn.png)
-
-### 4. Customer Retention & Cohorts
-![Retention](dashboard_4_retention.png)
-
-### 5. Discounts & Downgrades
-![Discounts](dashboard_5_discounts.png)
+[View the full dashboard (PDF)](dashboard.pdf)
 
 End-to-end project to identify, quantify, and reduce subscription revenue leakage.
 **Pipeline: Python → SQL → Power BI.**
